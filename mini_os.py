@@ -2,6 +2,19 @@ import os
 import subprocess
 import platform
 
+def dir_show_items():
+    # Get the current working directory
+    current_dir = os.getcwd()
+    print(f"Pegando itens no diretorio {current_dir}:")
+    
+    # Listando os itens do diretório
+    with os.scandir(current_dir) as entries:
+        for entry in entries:
+            if entry.is_dir():
+                print(f"<DIR> {entry.name}")
+            else:
+                print(f"     {entry.name}")
+
 def clear_screen():
     if platform.system() == "Windows":
         os.system('cls')
@@ -46,6 +59,7 @@ def show_help():
     print("  cd <diretório>  - Muda o diretório atual.")
     print("  editor <arquivo> - Inicia o editor de texto.")
     print("  del <arquivo>   - Exclui o arquivo especificado.")
+    print("  dir             - Mostra o diretório(dir)")
 
 def mini_os_shell():
     print("Bem-vindo ao MiniOS! Digite 'help' para ver os comandos disponíveis.")
@@ -78,6 +92,9 @@ def mini_os_shell():
         elif command.lower() == 'help':
             show_help()
         
+        elif command.lower() == 'dir':
+            dir_show_items()
+
         else:
             print(f"Commando não encontrado: {command}")
 
