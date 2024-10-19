@@ -2,6 +2,9 @@ import os
 import subprocess
 import platform
 
+def echo(word):
+    print(word)
+
 def dir_show_items():
     # Get the current working directory
     current_dir = os.getcwd()
@@ -60,6 +63,7 @@ def show_help():
     print("  editor <arquivo> - Inicia o editor de texto.")
     print("  del <arquivo>   - Exclui o arquivo especificado.")
     print("  dir             - Mostra o diretório(dir)")
+    print("  echo <frase>    - Diz o que escreveu")
 
 def mini_os_shell():
     print("Bem-vindo ao MiniOS! Digite 'help' para ver os comandos disponíveis.")
@@ -71,6 +75,10 @@ def mini_os_shell():
         if command.lower() in ['exit', 'quit']:
             break
         
+        elif command.startswith('echo '):
+            word = command.split(' ', 1)[1]
+            echo(word)
+
         elif command.startswith('cd '):
             path = command[3:].strip()
             try:
